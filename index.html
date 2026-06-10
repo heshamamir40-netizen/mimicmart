@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MimicMart – Buy Robux</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Cairo:wght@400;600;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050810;
+  --bg2: #080d1a;
+  --bg3: #0d1525;
+  --neon: #00d4ff;
+  --neon2: #7b2fff;
+  --neon3: #ff3cac;
+  --gold: #ffd700;
+  --text: #e8eeff;
+  --muted: #7a8ab0;
+  --card: rgba(13,21,37,0.85);
+  --border: rgba(0,212,255,0.18);
+  --glow: 0 0 30px rgba(0,212,255,0.25);
+  --glow2: 0 0 30px rgba(123,47,255,0.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: 'Rajdhani','Cairo',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: default;
+  direction: ltr;
+}
+
+/* Animated bg */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(123,47,255,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(0,212,255,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 60% 20%, rgba(255,60,172,0.06) 0%, transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Grid overlay */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:1000;
+  background: rgba(5,8,16,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 5%;
+  height: 64px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo {
+  font-family:'Orbitron',monospace;
+  font-size:1.4rem;
+  font-weight:900;
+  background: linear-gradient(135deg, var(--neon), var(--neon2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  letter-spacing:2px;
+}
+.nav-right { display:flex; align-items:center; gap:1rem; }
+
+/* Currency toggle */
+.currency-toggle {
+  display:flex;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+}
+.currency-btn {
+  padding: 4px 14px;
+  font-size:.8rem;
+  font-weight:700;
+  cursor:pointer;
+  border:none;
+  background:transparent;
+  color: var(--muted);
+  transition:.3s;
+  font-family:inherit;
+}
+.currency-btn.active {
+  background: linear-gradient(135deg, var(--neon2), var(--neon));
+  color:#fff;
+}
+.cart-btn {
+  position:relative;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius:50%;
+  width:44px; height:44px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  transition:.3s;
+  font-size:1.2rem;
+}
+.cart-btn:hover { border-color:var(--neon); box-shadow:var(--glow); }
+.cart-count {
+  position:absolute;
+  top:-6px; right:-6px;
+  background: var(--neon3);
+  color:#fff;
+  font-size:.65rem;
+  font-weight:900;
+  width:20px; height:20px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  display:none;
+}
+
+/* ── HERO ── */
+#hero {
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center;
+  padding: 100px 5% 60px;
+  overflow:hidden;
+}
+.hero-badge {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background: rgba(123,47,255,0.15);
+  border: 1px solid rgba(123,47,255,0.4);
+  border-radius:50px;
+  padding: 6px 18px;
+  font-size:.8rem;
+  color:var(--neon);
+  margin-bottom:2rem;
+  animation: fadeDown .8s ease both;
+}
+.hero-title {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight:900;
+  line-height:1.15;
+  margin-bottom:1.2rem;
+  animation: fadeUp .8s ease .2s both;
+}
+.hero-title .highlight {
+  background: linear-gradient(135deg, var(--neon), var(--neon2), var(--neon3));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.hero-sub {
+  font-size:1.1rem;
+  color:var(--muted);
+  margin-bottom:2.5rem;
+  animation: fadeUp .8s ease .4s both;
+}
+.hero-cta {
+  display:inline-flex; align-items:center; gap:.6rem;
+  background: linear-gradient(135deg, var(--neon2), var(--neon));
+  color:#fff;
+  padding: 16px 40px;
+  border-radius:50px;
+  font-size:1.1rem;
+  font-weight:700;
+  cursor:pointer;
+  border:none;
+  text-decoration:none;
+  animation: fadeUp .8s ease .6s both, pulse-glow 2s ease-in-out 1.5s infinite;
+  transition: transform .2s;
+}
+.hero-cta:hover { transform:scale(1.05); }
+.hero-stats {
+  display:flex; gap:3rem; margin-top:3rem;
+  animation: fadeUp .8s ease .8s both;
+}
+.stat { text-align:center; }
+.stat-num {
+  font-family:'Orbitron',monospace;
+  font-size:1.6rem; font-weight:700;
+  color:var(--neon);
+}
+.stat-label { font-size:.8rem; color:var(--muted); }
+
+/* floating orbs */
+.orb {
+  position:absolute;
+  border-radius:50%;
+  filter:blur(60px);
+  pointer-events:none;
+  animation: float 6s ease-in-out infinite;
+}
+.orb1 { width:300px;height:300px; background:rgba(0,212,255,0.08); top:10%; left:-5%; animation-delay:0s; }
+.orb2 { width:200px;height:200px; background:rgba(123,47,255,0.1); top:60%; right:-5%; animation-delay:2s; }
+.orb3 { width:150px;height:150px; background:rgba(255,60,172,0.07); bottom:10%; left:40%; animation-delay:4s; }
+
+/* ── SECTION BASE ── */
+section { position:relative; z-index:1; padding:80px 5%; }
+.section-title {
+  text-align:center;
+  font-size:clamp(1.5rem,4vw,2.4rem);
+  font-weight:900;
+  margin-bottom:.6rem;
+}
+.section-sub {
+  text-align:center; color:var(--muted); margin-bottom:3rem; font-size:.95rem;
+}
+.neon-line {
+  width:60px; height:3px;
+  background:linear-gradient(90deg,var(--neon),var(--neon2));
+  border-radius:2px; margin:0 auto 2rem;
+}
+
+/* ── PRICING ── */
+#pricing { background: var(--bg2); }
+.pricing-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:1.5rem;
+  max-width:1100px; margin:0 auto;
+}
+.price-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius:20px;
+  padding:2rem 1.5rem;
+  text-align:center;
+  position:relative;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+  cursor:pointer;
+  overflow:hidden;
+}
+.price-card::before {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(0,212,255,0.03),rgba(123,47,255,0.03));
+  opacity:0; transition:.3s;
+}
+.price-card:hover { transform:translateY(-8px); box-shadow:var(--glow); border-color:rgba(0,212,255,0.4); }
+.price-card:hover::before { opacity:1; }
+.price-card.best {
+  border-color:var(--gold);
+  box-shadow: 0 0 30px rgba(255,215,0,0.2);
+}
+.best-badge {
+  position:absolute; top:14px; left:14px;
+  background:linear-gradient(135deg,#ffd700,#ff9500);
+  color:#000;
+  font-size:.7rem; font-weight:900;
+  padding:4px 12px; border-radius:50px;
+}
+.robux-icon { font-size:2.5rem; margin-bottom:.8rem; }
+.robux-amount {
+  font-family:'Orbitron',monospace;
+  font-size:1.6rem; font-weight:700;
+  color:var(--neon);
+  margin-bottom:.4rem;
+}
+.robux-label { color:var(--muted); font-size:.85rem; margin-bottom:1rem; }
+.price-tag {
+  font-size:1.8rem; font-weight:900;
+  color:#fff; margin-bottom:1.5rem;
+}
+.price-tag span { font-size:.9rem; color:var(--muted); }
+.add-cart-btn {
+  width:100%;
+  background:linear-gradient(135deg,var(--neon2),var(--neon));
+  border:none; border-radius:12px;
+  padding:12px;
+  color:#fff; font-size:1rem; font-weight:700;
+  cursor:pointer; transition:.3s;
+  font-family:inherit;
+}
+.price-card.best .add-cart-btn {
+  background:linear-gradient(135deg,#ffd700,#ff9500);
+  color:#000;
+}
+.add-cart-btn:hover { opacity:.85; transform:scale(1.02); }
+
+/* ── HOW IT WORKS ── */
+#how { background:var(--bg); }
+.steps { display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; max-width:900px; margin:0 auto; }
+.step {
+  flex:1; min-width:200px; max-width:260px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:2rem 1.5rem;
+  text-align:center;
+  transition:.3s;
+}
+.step:hover { border-color:var(--neon); box-shadow:var(--glow); }
+.step-num {
+  width:50px; height:50px;
+  background:linear-gradient(135deg,var(--neon2),var(--neon));
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Orbitron',monospace;
+  font-size:1.3rem; font-weight:700;
+  margin:0 auto 1rem;
+}
+.step-icon { font-size:2rem; margin-bottom:.8rem; }
+.step h3 { font-size:1.1rem; font-weight:700; margin-bottom:.4rem; }
+.step p { color:var(--muted); font-size:.85rem; }
+
+/* ── TRUST ── */
+#trust { background:var(--bg2); }
+.trust-grid { display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; }
+.trust-item {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:16px; padding:1.5rem 2rem;
+  text-align:center; min-width:180px;
+  transition:.3s;
+}
+.trust-item:hover { border-color:var(--neon2); box-shadow:var(--glow2); }
+.trust-icon { font-size:2rem; margin-bottom:.6rem; }
+.trust-item h3 { font-size:1rem; font-weight:700; }
+
+/* ── TESTIMONIALS ── */
+#testimonials { background:var(--bg); }
+.reviews { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; max-width:1000px; margin:0 auto; }
+.review {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:16px; padding:1.5rem;
+  transition:.3s;
+}
+.review:hover { border-color:rgba(0,212,255,0.3); }
+.review-stars { color:var(--gold); font-size:1rem; margin-bottom:.6rem; }
+.review-text { color:var(--text); font-size:.9rem; line-height:1.7; margin-bottom:1rem; }
+.review-author { display:flex; align-items:center; gap:.8rem; }
+.review-avatar {
+  width:36px; height:36px; border-radius:50%;
+  background:linear-gradient(135deg,var(--neon2),var(--neon));
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem;
+}
+.review-name { font-weight:700; font-size:.9rem; }
+.review-date { font-size:.75rem; color:var(--muted); }
+
+/* ── FAQ ── */
+#faq { background:var(--bg2); }
+.faq-list { max-width:700px; margin:0 auto; display:flex; flex-direction:column; gap:1rem; }
+.faq-item {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden; cursor:pointer;
+  transition:.3s;
+}
+.faq-item:hover { border-color:var(--neon2); }
+.faq-q {
+  padding:1.2rem 1.5rem;
+  display:flex; align-items:center; justify-content:space-between;
+  font-weight:700; font-size:.95rem;
+}
+.faq-arrow { transition:.3s; font-size:.8rem; }
+.faq-item.open .faq-arrow { transform:rotate(180deg); }
+.faq-a {
+  padding:0 1.5rem;
+  color:var(--muted);
+  font-size:.9rem;
+  max-height:0; overflow:hidden;
+  transition: max-height .4s, padding .4s;
+}
+.faq-item.open .faq-a { max-height:200px; padding:0 1.5rem 1.2rem; }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--bg3); border-top:1px solid var(--border);
+  padding:3rem 5% 2rem; position:relative; z-index:1;
+}
+.footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; margin-bottom:2rem; }
+.footer-logo { font-family:'Orbitron',monospace; font-size:1.2rem; font-weight:900; color:var(--neon); margin-bottom:.8rem; }
+.footer-desc { color:var(--muted); font-size:.85rem; line-height:1.7; }
+.footer-h { font-weight:700; margin-bottom:1rem; color:var(--neon); font-size:.9rem; }
+.footer-links { list-style:none; display:flex; flex-direction:column; gap:.5rem; }
+.footer-links a { color:var(--muted); text-decoration:none; font-size:.85rem; transition:.2s; }
+.footer-links a:hover { color:var(--neon); }
+.social-links { display:flex; gap:.8rem; margin-top:1rem; }
+.social-btn {
+  width:38px; height:38px;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:10px; display:flex; align-items:center; justify-content:center;
+  font-size:1rem; cursor:pointer; transition:.3s; text-decoration:none;
+}
+.social-btn:hover { border-color:var(--neon); box-shadow:var(--glow); }
+.footer-bottom {
+  border-top:1px solid var(--border); padding-top:1.5rem;
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:1rem;
+  color:var(--muted); font-size:.8rem;
+}
+
+/* ── CART OVERLAY ── */
+.cart-overlay {
+  position:fixed; inset:0;
+  background:rgba(5,8,16,0.85);
+  backdrop-filter:blur(10px);
+  z-index:2000;
+  display:none;
+  align-items:flex-start; justify-content:flex-end;
+}
+.cart-overlay.open { display:flex; }
+.cart-panel {
+  width:100%; max-width:520px; height:100vh;
+  background:var(--bg2);
+  border-left:1px solid var(--border);
+  display:flex; flex-direction:column;
+  overflow-y:auto;
+  animation: slideIn .3s ease;
+}
+@keyframes slideIn { from{transform:translateX(100%)} to{transform:translateX(0)} }
+
+.cart-header {
+  padding:1.5rem; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--bg3);
+}
+.cart-header h2 { font-size:1.2rem; font-weight:700; }
+.close-cart {
+  background:none; border:none; color:var(--muted);
+  font-size:1.5rem; cursor:pointer; padding:.2rem .5rem;
+  transition:.2s;
+}
+.close-cart:hover { color:var(--neon); }
+.cart-body { padding:1.5rem; flex:1; display:flex; flex-direction:column; gap:1.5rem; }
+.cart-empty { text-align:center; color:var(--muted); padding:3rem 0; font-size:1.1rem; }
+
+/* cart item */
+.cart-item {
+  background:var(--card); border:1px solid var(--border); border-radius:14px;
+  padding:1rem 1.2rem;
+  display:flex; align-items:center; gap:1rem;
+}
+.cart-item-icon { font-size:1.8rem; }
+.cart-item-info { flex:1; }
+.cart-item-name { font-weight:700; font-size:.95rem; }
+.cart-item-price { color:var(--neon); font-size:.85rem; }
+.cart-item-controls { display:flex; align-items:center; gap:.5rem; }
+.qty-btn {
+  width:28px; height:28px; border-radius:50%;
+  background:var(--bg3); border:1px solid var(--border);
+  color:var(--text); cursor:pointer; font-size:1rem;
+  display:flex; align-items:center; justify-content:center;
+  transition:.2s;
+}
+.qty-btn:hover { border-color:var(--neon); color:var(--neon); }
+.qty-val { font-weight:700; min-width:20px; text-align:center; }
+.remove-btn {
+  background:none; border:none; color:var(--muted); cursor:pointer;
+  font-size:1rem; transition:.2s; margin-left:.3rem;
+}
+.remove-btn:hover { color:var(--neon3); }
+
+/* Ziina payment section */
+.payment-box {
+  background:linear-gradient(135deg,rgba(123,47,255,0.12),rgba(0,212,255,0.08));
+  border:1px solid rgba(0,212,255,0.3);
+  border-radius:16px; padding:1.5rem;
+  box-shadow: 0 0 20px rgba(0,212,255,0.1), inset 0 0 30px rgba(123,47,255,0.05);
+}
+.payment-title {
+  font-weight:900; font-size:1rem; margin-bottom:1rem;
+  display:flex; align-items:center; gap:.5rem;
+}
+.ziina-block {
+  background:var(--bg3); border:1px solid rgba(0,173,181,0.35);
+  border-radius:12px; padding:1rem 1.2rem;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem;
+}
+.ziina-logo {
+  display:flex; align-items:center; gap:.6rem;
+}
+.ziina-logo-icon {
+  width:36px; height:36px; border-radius:8px;
+  background:linear-gradient(135deg,#00ada5,#00b4ac);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem; font-weight:900; color:#fff;
+  font-family:'Orbitron',monospace;
+}
+.ziina-name { font-weight:700; font-size:.95rem; color:#fff; }
+.ziina-badge {
+  background:rgba(0,173,181,0.15); border:1px solid rgba(0,173,181,0.4);
+  color:#00ada5; font-size:.72rem; font-weight:700;
+  padding:3px 10px; border-radius:50px;
+  white-space:nowrap;
+}
+.payment-note {
+  font-size:.82rem; color:var(--muted); margin-top:.8rem;
+  line-height:1.6;
+}
+
+/* checkout form */
+.checkout-form { display:flex; flex-direction:column; gap:1rem; }
+.form-group { display:flex; flex-direction:column; gap:.4rem; }
+.form-label { font-size:.85rem; font-weight:600; color:var(--text); }
+.form-input, .form-textarea {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:10px; padding:.8rem 1rem;
+  color:var(--text); font-size:.9rem; font-family:inherit;
+  transition:.3s; outline:none;
+}
+.form-input:focus, .form-textarea:focus { border-color:var(--neon); box-shadow:0 0 10px rgba(0,212,255,0.15); }
+
+/* order total */
+.order-total {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; padding:1.2rem 1.5rem;
+}
+.total-row { display:flex; justify-content:space-between; align-items:center; }
+.total-label { color:var(--muted); font-size:.9rem; }
+.total-amount {
+  font-family:'Orbitron',monospace; font-size:1.4rem; font-weight:700;
+  color:var(--neon);
+}
+
+.confirm-btn {
+  width:100%;
+  background:linear-gradient(135deg,var(--neon2),var(--neon));
+  border:none; border-radius:14px;
+  padding:16px; color:#fff; font-size:1.1rem; font-weight:700;
+  cursor:pointer; font-family:inherit; transition:.3s;
+  margin-top:1rem;
+  display:flex; align-items:center; justify-content:center; gap:.5rem;
+}
+.confirm-btn:hover { opacity:.85; transform:scale(1.01); }
+.confirm-btn:disabled { opacity:.5; cursor:not-allowed; transform:none; }
+
+/* success */
+.success-screen {
+  display:none; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:3rem 2rem; gap:1rem; height:60vh;
+}
+.success-icon { font-size:5rem; animation: pop .5s ease; }
+.success-title { font-size:1.4rem; font-weight:900; color:var(--neon); }
+.success-msg { color:var(--muted); line-height:1.7; }
+
+/* ── STICKY CTA ── */
+.sticky-cta {
+  position:fixed; bottom:1.5rem; left:50%; transform:translateX(-50%);
+  z-index:900;
+  background:linear-gradient(135deg,var(--neon2),var(--neon));
+  color:#fff; padding:14px 36px; border-radius:50px;
+  font-weight:700; font-size:1rem; cursor:pointer; border:none;
+  box-shadow:0 4px 30px rgba(123,47,255,0.4);
+  font-family:inherit; transition:.3s;
+  display:none;
+}
+.sticky-cta:hover { transform:translateX(-50%) scale(1.05); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes float {
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+}
+@keyframes pulse-glow {
+  0%,100%{box-shadow:0 4px 20px rgba(123,47,255,0.3)}
+  50%{box-shadow:0 4px 40px rgba(0,212,255,0.5)}
+}
+@keyframes pop { 0%{transform:scale(0)} 70%{transform:scale(1.2)} 100%{transform:scale(1)} }
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px) {
+  .hero-stats { gap:1.5rem; flex-wrap:wrap; justify-content:center; }
+  .steps { gap:1rem; }
+  .cart-panel { max-width:100%; }
+}
+
+/* Scroll reveal */
+.reveal { opacity:0; transform:translateY(30px); transition:opacity .7s, transform .7s; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">MIMICMART</div>
+  <div class="nav-right">
+    <div class="currency-toggle">
+      <button class="currency-btn active" id="usd-btn" onclick="setCurrency('USD')">$ USD</button>
+      <button class="currency-btn" id="eur-btn" onclick="setCurrency('EUR')">€ EUR</button>
+    </div>
+    <button class="cart-btn" onclick="openCart()" title="Cart">
+      🛒
+      <span class="cart-count" id="cart-count">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="hero-badge">🎮 The #1 Global Robux Store</div>
+  <h1 class="hero-title">
+    Buy Robux<br>
+    <span class="highlight">at the Best Price 🔥</span>
+  </h1>
+  <p class="hero-sub">Fast, simple, and unbeatable prices — worldwide delivery</p>
+  <a href="#pricing" class="hero-cta">
+    <span>🎮</span>
+    <span>Buy Now</span>
+  </a>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Happy Customers</div></div>
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Instant Support</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Safe & Secure</div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <h2 class="section-title reveal">Choose Your Package 💰</h2>
+  <p class="section-sub reveal">Exclusive prices you won't find anywhere else</p>
+  <div class="neon-line reveal"></div>
+  <div class="pricing-grid" id="pricing-grid">
+    <!-- Filled by JS -->
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <h2 class="section-title reveal">How It Works ⚙️</h2>
+  <div class="neon-line reveal"></div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div class="step-icon">📦</div>
+      <h3>Choose Package</h3>
+      <p>Pick the amount that suits you and add it to your cart</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <div class="step-icon">💳</div>
+      <h3>Pay via Ziina</h3>
+      <p>Secure payment through Ziina checkout</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <div class="step-icon">🚀</div>
+      <h3>Receive Robux</h3>
+      <p>We'll deliver your Robux as fast as possible</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <h2 class="section-title reveal">Why MimicMart? 🔒</h2>
+  <div class="neon-line reveal"></div>
+  <div class="trust-grid">
+    <div class="trust-item reveal">
+      <div class="trust-icon">🔒</div>
+      <h3>100% Safe</h3>
+      <p style="color:var(--muted);font-size:.82rem;margin-top:.4rem">Your transactions are completely secure</p>
+    </div>
+    <div class="trust-item reveal">
+      <div class="trust-icon">⚡</div>
+      <h3>Fast Delivery</h3>
+      <p style="color:var(--muted);font-size:.82rem;margin-top:.4rem">In the shortest time possible</p>
+    </div>
+    <div class="trust-item reveal">
+      <div class="trust-icon">💬</div>
+      <h3>24/7 Support</h3>
+      <p style="color:var(--muted);font-size:.82rem;margin-top:.4rem">Here to serve you anytime</p>
+    </div>
+    <div class="trust-item reveal">
+      <div class="trust-icon">💰</div>
+      <h3>Best Price</h3>
+      <p style="color:var(--muted);font-size:.82rem;margin-top:.4rem">Prices you won't find anywhere else</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <h2 class="section-title reveal">Customer Reviews 💬</h2>
+  <div class="neon-line reveal"></div>
+  <div class="reviews">
+    <div class="review reveal">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">Excellent experience! I bought 1400 Robux and received them in less than an hour. Best store I've dealt with 🔥</p>
+      <div class="review-author">
+        <div class="review-avatar">👾</div>
+        <div><div class="review-name">Ahmed_Gamer99</div><div class="review-date">3 days ago</div></div>
+      </div>
+    </div>
+    <div class="review reveal">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">Great prices and reliable. Support replies fast on WhatsApp. Will buy again soon 💯</p>
+      <div class="review-author">
+        <div class="review-avatar">🎮</div>
+        <div><div class="review-name">Roblox_Sara</div><div class="review-date">1 week ago</div></div>
+      </div>
+    </div>
+    <div class="review reveal">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">Tried the 3500 package and it worked perfectly. Clean and easy website. Great for anyone who can't buy Robux abroad 🎯</p>
+      <div class="review-author">
+        <div class="review-avatar">🏆</div>
+        <div><div class="review-name">XxProGamer_EG</div><div class="review-date">5 days ago</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2 class="section-title reveal">FAQ ❓</h2>
+  <div class="neon-line reveal"></div>
+  <div class="faq-list">
+    <div class="faq-item reveal" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>Is delivery instant?</span> <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Delivery happens as fast as possible after payment verification, usually within an hour or less.</div>
+    </div>
+    <div class="faq-item reveal" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>What payment methods are available?</span> <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">We accept payments via Ziina. You'll be redirected to our secure Ziina checkout to complete your payment.</div>
+    </div>
+    <div class="faq-item reveal" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>Is it safe?</span> <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes 100%! We handle all orders securely and confidentially through Ziina. We have hundreds of satisfied customers worldwide.</div>
+    </div>
+    <div class="faq-item reveal" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>How do you send the Robux?</span> <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">We create a special Gamepass for your account and you purchase it — the safest method.</div>
+    </div>
+    <div class="faq-item reveal" onclick="toggleFaq(this)">
+      <div class="faq-q"><span>Can I pay in EUR?</span> <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes! Use the currency switcher at the top of the page to toggle between USD and EUR. Ziina accepts both currencies.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">MIMICMART</div>
+      <p class="footer-desc">The #1 global Robux store. Fast, safe, and best price.</p>
+      <div class="social-links">
+        <a class="social-btn" href="#" title="TikTok">🎵</a>
+        <a class="social-btn" href="#" title="Instagram">📸</a>
+        <a class="social-btn" href="#" title="Discord">💬</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-h">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-h">Contact Us</div>
+      <ul class="footer-links">
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Discord</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 MimicMart. All rights reserved.</span>
+    <span style="color:var(--neon);font-size:.75rem">Payments via 💳 Ziina</span>
+  </div>
+</footer>
+
+<!-- STICKY CTA -->
+<button class="sticky-cta" id="sticky-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+  Buy Now 🔥
+</button>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCartOutside(event)">
+  <div class="cart-panel" id="cart-panel">
+    <div class="cart-header">
+      <h2>🛒 Shopping Cart</h2>
+      <button class="close-cart" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-body" id="cart-body">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CURRENCY & PRICING ──
+// Base prices in USD. 700 Robux = $8.00
+const PACKAGES = [
+  { robux: 700,  usd: 8.00,  icon: '💎',       best: false },
+  { robux: 1400, usd: 16.00, icon: '💎💎',     best: false },
+  { robux: 2100, usd: 24.00, icon: '💎💎💎',   best: false },
+  { robux: 2800, usd: 32.00, icon: '🔷💎💎',   best: false },
+  { robux: 3500, usd: 40.00, icon: '👑💎',      best: true  },
+];
+const EUR_RATE = 0.92; // 1 USD = 0.92 EUR (approximate)
+
+let currency = 'USD';
+let cart = [];
+
+function getSymbol() { return currency === 'USD' ? '$' : '€'; }
+function convertPrice(usd) {
+  if(currency === 'USD') return usd.toFixed(2);
+  return (usd * EUR_RATE).toFixed(2);
+}
+function displayPrice(usd) {
+  return getSymbol() + convertPrice(usd);
+}
+
+function setCurrency(c) {
+  currency = c;
+  document.getElementById('usd-btn').classList.toggle('active', c === 'USD');
+  document.getElementById('eur-btn').classList.toggle('active', c === 'EUR');
+  renderPricingGrid();
+  renderCart();
+}
+
+function renderPricingGrid() {
+  const grid = document.getElementById('pricing-grid');
+  grid.innerHTML = PACKAGES.map(p => `
+    <div class="price-card${p.best?' best':''} reveal" onclick="addToCart(${p.robux},${p.usd})">
+      ${p.best ? '<span class="best-badge">Best Value ⭐</span>' : ''}
+      <div class="robux-icon">${p.icon}</div>
+      <div class="robux-amount">${p.robux}</div>
+      <div class="robux-label">Robux</div>
+      <div class="price-tag">${displayPrice(p.usd)} <span>${currency}</span></div>
+      <button class="add-cart-btn">Add to Cart 🛒</button>
+    </div>
+  `).join('');
+  // re-observe new elements
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+}
+
+// ── STATE ──
+function addToCart(robux, usdPrice) {
+  const existing = cart.find(i => i.robux === robux);
+  if(existing) existing.qty++;
+  else cart.push({ robux, usdPrice, qty:1 });
+  updateCartCount();
+  openCart();
+  const icon = document.querySelector('.cart-btn');
+  icon.style.transform = 'scale(1.3)';
+  setTimeout(() => icon.style.transform = '', 200);
+}
+
+function updateCartCount() {
+  const total = cart.reduce((s,i) => s+i.qty, 0);
+  const el = document.getElementById('cart-count');
+  el.textContent = total;
+  el.style.display = total > 0 ? 'flex' : 'none';
+}
+
+function openCart() {
+  document.getElementById('cart-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderCart();
+}
+
+function closeCart() {
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeCartOutside(e) {
+  if(e.target === document.getElementById('cart-overlay')) closeCart();
+}
+
+function changeQty(robux, delta) {
+  const item = cart.find(i => i.robux === robux);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0) cart = cart.filter(i => i.robux !== robux);
+  updateCartCount();
+  renderCart();
+}
+
+function removeItem(robux) {
+  cart = cart.filter(i => i.robux !== robux);
+  updateCartCount();
+  renderCart();
+}
+
+function getTotalUSD() {
+  return cart.reduce((s,i) => s + i.usdPrice * i.qty, 0);
+}
+
+function renderCart() {
+  const body = document.getElementById('cart-body');
+  if(cart.length === 0) {
+    body.innerHTML = `
+      <div class="cart-empty">
+        <div style="font-size:3rem;margin-bottom:1rem">🛒</div>
+        <div>Cart is empty... start shopping!</div>
+      </div>`;
+    return;
+  }
+
+  const itemsHtml = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-icon">💎</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.robux} Robux</div>
+        <div class="cart-item-price">${displayPrice(item.usdPrice)} each</div>
+      </div>
+      <div class="cart-item-controls">
+        <button class="qty-btn" onclick="changeQty(${item.robux},-1)">−</button>
+        <span class="qty-val">${item.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${item.robux},1)">+</button>
+        <button class="remove-btn" onclick="removeItem(${item.robux})">🗑️</button>
+      </div>
+    </div>`).join('');
+
+  body.innerHTML = `
+    ${itemsHtml}
+
+    <!-- ZIINA PAYMENT BOX -->
+    <div class="payment-box">
+      <div class="payment-title">💳 Pay with Ziina</div>
+      <div class="ziina-block">
+        <div class="ziina-logo">
+          <div class="ziina-logo-icon">Z</div>
+          <div>
+            <div class="ziina-name">Ziina</div>
+            <div style="font-size:.78rem; color:var(--muted); margin-top:2px;">Secure Checkout</div>
+          </div>
+        </div>
+        <span class="ziina-badge">Accepted ✓</span>
+      </div>
+      <p class="payment-note">
+        ⚠️ Click "Complete Payment" below to proceed to our secure Ziina checkout. Complete your payment and we'll deliver your Robux shortly.
+      </p>
+    </div>
+
+    <!-- CHECKOUT FORM -->
+    <div class="checkout-form">
+      <h3 style="font-size:1rem;font-weight:700">📝 Order Details</h3>
+      <div class="form-group">
+        <label class="form-label">👤 Roblox Username</label>
+        <input class="form-input" id="f-username" type="text" placeholder="Enter your Roblox username">
+      </div>
+      <div class="form-group">
+        <label class="form-label">🔗 Gamepass Link</label>
+        <input class="form-input" id="f-gamepass" type="text" placeholder="https://www.roblox.com/game-pass/...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">💬 Contact (WhatsApp or Discord)</label>
+        <input class="form-input" id="f-contact" type="text" placeholder="WhatsApp number or Discord username">
+      </div>
+    </div>
+
+    <!-- ORDER TOTAL -->
+    <div class="order-total">
+      <div class="total-row">
+        <span class="total-label">Order Total:</span>
+        <span class="total-amount">${displayPrice(getTotalUSD())} ${currency}</span>
+      </div>
+      <div style="margin-top:.6rem;color:var(--muted);font-size:.8rem">
+        ${cart.map(i=>`${i.qty}× ${i.robux} Robux`).join(' + ')}
+      </div>
+    </div>
+
+    <button class="confirm-btn" id="confirm-btn" onclick="confirmOrder()">
+      💳 Complete Payment
+    </button>
+  `;
+}
+
+function confirmOrder() {
+  const username = document.getElementById('f-username')?.value.trim();
+  const gamepass = document.getElementById('f-gamepass')?.value.trim();
+  const contact = document.getElementById('f-contact')?.value.trim();
+  if(!username || !gamepass || !contact) {
+    alert('Please fill in all required fields');
+    return;
+  }
+
+  const order = {
+    username,
+    gamepass,
+    contact,
+    items: cart,
+    totalUSD: getTotalUSD().toFixed(2),
+    totalDisplay: displayPrice(getTotalUSD()) + ' ' + currency
+  };
+
+  // Show loading state
+  const btn = document.getElementById('confirm-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Processing...';
+
+  // Send to backend server
+  const serverURL = 'http://localhost:3000'; // Change to your server URL in production
+  
+  fetch(`${serverURL}/webhook/payment`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ orderData: order })
+  }).then(res => res.json()).then(data => {
+    console.log('✅ Notification sent to Telegram');
+    // Redirect to Ziina after notification is queued
+    window.location.href = 'https://pay.ziina.com/Minaelsharoony/xC_JYsI1M?source=app';
+  }).catch(err => {
+    console.error('❌ Error:', err);
+    alert('There was an error processing your order. Please try again.');
+    btn.disabled = false;
+    btn.textContent = '💳 Complete Payment';
+  });
+}
+
+// ── FAQ ──
+function toggleFaq(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if(!isOpen) el.classList.add('open');
+}
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── STICKY CTA ──
+window.addEventListener('scroll', () => {
+  const sticky = document.getElementById('sticky-cta');
+  sticky.style.display = window.scrollY > 400 ? 'block' : 'none';
+});
+
+// ── INIT ──
+renderPricingGrid();
+</script>
+</body>
+</html>
