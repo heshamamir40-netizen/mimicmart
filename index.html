@@ -1005,10 +1005,8 @@ function confirmOrder() {
   btn.disabled = true;
   btn.textContent = '⏳ Processing...';
 
-  // Send to backend server
-  const serverURL = 'http://localhost:3000'; // Change to your server URL in production
-  
-  fetch(`${serverURL}/webhook/payment`, {
+  // Send to Netlify function
+  fetch('/.netlify/functions/payment', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ orderData: order })
